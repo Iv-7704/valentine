@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Valentine?</title>
+  <style>
+    :root{
+      --bg1:#fff1f6;
+      --bg2:#ffe7f0;
+      --card:#ffffffcc;
+      --text:#2b2b2b;
+      --accent:#ff4d86;
+      --accent2:#7c4dff;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      background: radial-gradient(900px 600px at 20% 15%, var(--bg2), transparent 60%),
+                  radial-gradient(900px 600px at 80% 85%, #ffe2ea, transparent 60%),
+                  linear-gradient(180deg, var(--bg1), #fff);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      overflow:hidden;
+    }
+    .card{
+      width:min(720px, 92vw);
+      padding:28px 22px 26px;
+      border-radius:24px;
+      background:var(--card);
+      box-shadow: 0 18px 60px rgba(0,0,0,.08);
+      border: 1px solid rgba(255,255,255,.7);
+      backdrop-filter: blur(8px);
+      position:relative;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(22px, 3.3vw, 34px);
+      letter-spacing: .2px;
+      text-align:center;
+    }
+    .sub{
+      text-align:center;
+      margin:0 0 18px;
+      opacity:.85;
+      font-size: 14px;
+    }
+    .bear-wrap{
+      display:grid;
+      place-items:center;
+      margin-top:6px;
+    }
+    svg{
+      width: min(300px, 65vw);
+      height: auto;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.12));
+      user-select:none;
+    }
+
+    /* This box initially holds the Yes/No buttons; after Yes it shows the GIF */
+    .arena{
+      position:relative;
+      height: 220px;
+      margin-top: 10px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.45));
+      border: 1px dashed rgba(255,77,134,.35);
+      overflow:hidden;
+      display:grid;
+      place-items:center;
+    }
+
+    .btnRow{
+      position:relative;
+      width:100%;
+      height:100%;
+    }
+
+    .btn{
+      appearance:none;
+      border:none;
+      border-radius: 999px;
+      padding: 12px 22px;
+      font-weight: 700;
+      cursor:pointer;
+      font-size: 16px;
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+      box-shadow: 0 10px 20px rgba(0,0,0,.10);
+      user-select:none;
+      position:absolute;
+    }
+    .btn:active{ transform: scale(.98); }
+
+    #yesBtn{
+      left: 34%;
+      top: 62%;
+      background: linear-gradient(135deg, var(--accent), #ff7aa8);
+      color:white;
+    }
+    #yesBtn:hover{ transform: translateY(-1px); filter: brightness(1.03); }
+
+    #noBtn{
+      left: 56%;
+      top: 62%;
+      background: linear-gradient(135deg, #2f2f2f, #555);
+      color:white;
+    }
+
+    .celebrate{
+      display:none;
+      text-align:center;
+      width:100%;
+      padding: 10px 10px 0;
+    }
+    .celebrate.show{
+      display:block;
+      animation: pop .35s ease;
+    }
+    .message{
+      margin: 0 auto 12px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(255,77,134,.14), rgba(124,77,255,.10));
+      border: 1px solid rgba(255,77,134,.25);
+      font-weight:900;
+      letter-spacing:.3px;
+    }
+    .gif{
+      width: min(340px, 80vw);
+      border-radius: 18px;
+      box-shadow: 0 14px 30px rgba(0,0,0,.14);
+      border: 1px solid rgba(255,255,255,.7);
+    }
+
+    @keyframes pop{
+      0%{ transform: scale(.9); opacity: 0; }
+      100%{ transform: scale(1); opacity: 1; }
+    }
+    .tiny{
+      text-align:center;
+      margin-top:10px;
+      font-size:12px;
+      opacity:.7;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="bear-wrap" aria-hidden="true">
+      <svg viewBox="0 0 420 360" role="img" aria-label="Cute teddy bear">
+        <circle cx="120" cy="85" r="55" fill="#b57b4a"/>
+        <circle cx="300" cy="85" r="55" fill="#b57b4a"/>
+        <circle cx="120" cy="90" r="32" fill="#d6a57a"/>
+        <circle cx="300" cy="90" r="32" fill="#d6a57a"/>
+        <circle cx="210" cy="140" r="120" fill="#b57b4a"/>
+        <circle cx="140" cy="170" r="42" fill="#c98e5f" opacity=".55"/>
+        <circle cx="280" cy="170" r="42" fill="#c98e5f" opacity=".55"/>
+        <ellipse cx="210" cy="205" rx="78" ry="60" fill="#d6a57a"/>
+        <circle cx="165" cy="150" r="14" fill="#1f1f1f"/>
+        <circle cx="255" cy="150" r="14" fill="#1f1f1f"/>
+        <circle cx="160" cy="145" r="5" fill="#ffffff"/>
+        <circle cx="250" cy="145" r="5" fill="#ffffff"/>
+        <path d="M210 188c18 0 34 10 34 24s-16 28-34 28-34-14-34-28 16-24 34-24z" fill="#2b2b2b"/>
+        <path d="M210 238c0 22-22 35-44 35" stroke="#2b2b2b" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M210 238c0 22 22 35 44 35" stroke="#2b2b2b" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M340 230
+                 c-18-30-62-20-62 18
+                 c0 42 62 78 62 78
+                 s62-36 62-78
+                 c0-38-44-48-62-18z"
+              fill="#ff4d86" opacity=".95"/>
+      </svg>
+    </div>
+
+    <h1>noorie will you be my valentine?</h1>
+    <p class="sub">Choose wisely 😌</p>
+
+    <div class="arena" id="arena">
+      <!-- Buttons view -->
+      <div class="btnRow" id="btnRow">
+        <button class="btn" id="yesBtn" type="button">Yes</button>
+        <button class="btn" id="noBtn" type="button">No</button>
+      </div>
+
+      <!-- Celebration view (replaces the options) -->
+      <div class="celebrate" id="celebrate">
+        <div class="message">
+          LETSSS GOOOOO MOTTOOOO! I knew you'd pick the right answer
+        </div>
+        <img class="gif" src="./dancing-minion.gif?v=2" alt="Dancing minion gif" />
+      </div>
+    </div>
+
+    <div class="tiny" id="hint">Tip: the “No” button is shy.</div>
+  </main>
+
+  <script>
+    const arena = document.getElementById('arena');
+    const btnRow = document.getElementById('btnRow');
+    const noBtn  = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const celebrate = document.getElementById('celebrate');
+    const hint = document.getElementById('hint');
+
+    function moveNoButton() {
+      const pad = 10;
+
+      const arenaRect = arena.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const maxX = arenaRect.width  - btnRect.width  - pad;
+      const maxY = arenaRect.height - btnRect.height - pad;
+
+      const x = Math.max(pad, Math.floor(Math.random() * maxX));
+      const y = Math.max(pad, Math.floor(Math.random() * maxY));
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top  = y + "px";
+    }
+
+    noBtn.addEventListener('mouseenter', moveNoButton);
+    noBtn.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      moveNoButton();
+    }, { passive:false });
+
+    yesBtn.addEventListener('click', () => {
+      // Replace the Yes/No options with the GIF + message
+      btnRow.style.display = "none";
+      hint.style.display = "none";
+      celebrate.classList.add('show');
+    });
+
+    window.addEventListener('load', () => {
+      yesBtn.style.left = "34%";
+      yesBtn.style.top  = "62%";
+      noBtn.style.left  = "56%";
+      noBtn.style.top   = "62%";
+    });
+  </script>
+</body>
+</html>
